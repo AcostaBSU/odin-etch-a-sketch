@@ -4,6 +4,10 @@ body {
   align-items: center;
 }
 
+.slider-container {
+  text-align: center;
+}
+
 .grid {
   display: flex;
   flex-direction: column;

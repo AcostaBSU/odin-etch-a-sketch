@@ -11,3 +11,9 @@ for (let i = 0; i < 10; i++) {
   grid.appendChild(row);
 }
 
+const slider = document.querySelector(".setSize");
+const displaySize = document.querySelector(".displaySize");
+displaySize.textContent = `Grid size: ${slider.value}`;
+slider.addEventListener('input', event => {
+  displaySize.textContent = `Grid size: ${event.target.value}`;
+});
