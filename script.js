@@ -36,7 +36,6 @@ function destroyGrid() {
 
 function addBoxes(n) {
   const rows = document.querySelectorAll(".row");
-
   rows.forEach((row) => {
     for (let i = 0; i < n; i++) {
       const box = document.createElement("div");
@@ -44,8 +43,8 @@ function addBoxes(n) {
       row.appendChild(box);
     }
   });
+
   const grid = document.querySelector(".grid");
-  
   for (let i = 0; i < n; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
@@ -61,13 +60,11 @@ function addBoxes(n) {
 
 function removeBoxes(n) {
   const grid = document.querySelector(".grid");
-  
   for (let i = 0; i < n; i++) {
     grid.removeChild(grid.lastElementChild);
   }
 
   const rows = document.querySelectorAll(".row");
-
   rows.forEach((row) => {
     for (let i = 0; i < n; i++) {
       row.removeChild(row.lastElementChild);
@@ -85,11 +82,11 @@ function clearColorOnGrid() {
 }
 
 function updateGrid(n) {
+  clearColorOnGrid();
+
   if (n < gridSize) removeBoxes(gridSize - n);
   else addBoxes(n - gridSize);
   gridSize = n;
-
-  clearColorOnGrid();
 }
 
 const slider = document.querySelector(".setSize");
@@ -98,7 +95,6 @@ let gridSize = null;
 
 displaySize.textContent = `Grid size: ${slider.value} x ${slider.value}`;
 createGrid(slider.valueAsNumber);
-
 
 slider.addEventListener('input', event => {
   displaySize.textContent = `Grid size: ${event.target.value} x ${event.target.value}`;
