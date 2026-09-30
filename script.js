@@ -96,12 +96,12 @@ const slider = document.querySelector(".setSize");
 const displaySize = document.querySelector(".displaySize");
 let gridSize = null;
 
-displaySize.textContent = `Grid size: ${slider.value}`;
+displaySize.textContent = `Grid size: ${slider.value} x ${slider.value}`;
 createGrid(slider.valueAsNumber);
 
 
 slider.addEventListener('input', event => {
-  displaySize.textContent = `Grid size: ${event.target.value}`;
+  displaySize.textContent = `Grid size: ${event.target.value} x ${event.target.value}`;
   updateGrid(event.target.valueAsNumber);
 });
 
