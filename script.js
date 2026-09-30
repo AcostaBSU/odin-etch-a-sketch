@@ -1,3 +1,9 @@
+function colorBox(event) {
+  let target = event.target;
+  let color = "black";
+  target.style.backgroundColor = color;
+}
+
 function createGrid(n) {
   const body = document.querySelector("body");
   const grid = document.createElement("div");
@@ -9,9 +15,11 @@ function createGrid(n) {
     row.classList.add("row");
     for (let j = 0; j < n; j++) {
       const box = document.createElement("div");
-      box.textContent= "*";
+      box.classList.add("box");
       row.appendChild(box);
     }
+
+    row.addEventListener("mouseover", colorBox);
     grid.appendChild(row);
   }
   
@@ -32,7 +40,7 @@ function addBoxes(n) {
   rows.forEach((row) => {
     for (let i = 0; i < n; i++) {
       const box = document.createElement("div");
-      box.textContent = "*";
+      box.classList.add("box");
       row.appendChild(box);
     }
   });
@@ -43,9 +51,10 @@ function addBoxes(n) {
     row.classList.add("row");
     for (let j = 0; j < n + gridSize; j++) {
       const box = document.createElement("div");
-      box.textContent= "*";
+      box.classList.add("box");
       row.appendChild(box);
     }
+    row.addEventListener("mouseover", colorBox);
     grid.appendChild(row);
   }
 }
@@ -66,11 +75,21 @@ function removeBoxes(n) {
   });
 }
 
+function clearColorOnGrid() {
+  let boxes = document.querySelectorAll(".box");
+
+  boxes.forEach((box) => {
+    box.style.backgroundColor = "";
+  });
+
+}
+
 function updateGrid(n) {
   if (n < gridSize) removeBoxes(gridSize - n);
   else addBoxes(n - gridSize);
-  
   gridSize = n;
+
+  clearColorOnGrid();
 }
 
 const slider = document.querySelector(".setSize");

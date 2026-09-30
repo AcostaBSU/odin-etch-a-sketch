@@ -11,8 +11,18 @@ body {
 .grid {
   display: flex;
   flex-direction: column;
+  height: 800px;
+  width: 800px;
 }
 
 .row {
-  display:flex;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.box {
+  flex: 1 1 auto;
+  border-style: solid;
+  border-color: black;
+  border-width: thin;
 }
