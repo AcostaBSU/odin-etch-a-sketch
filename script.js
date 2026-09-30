@@ -16,6 +16,7 @@ function createGrid(n) {
   }
   
   body.appendChild(grid);
+  gridSize = n;
 }
 
 function destroyGrid() {
@@ -25,16 +26,64 @@ function destroyGrid() {
   body.removeChild(grid);
 }
 
+function addBoxes(n) {
+  const rows = document.querySelectorAll(".row");
+
+  rows.forEach((row) => {
+    for (let i = 0; i < n; i++) {
+      const box = document.createElement("div");
+      box.textContent = "*";
+      row.appendChild(box);
+    }
+  });
+  const grid = document.querySelector(".grid");
+  
+  for (let i = 0; i < n; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    for (let j = 0; j < n + gridSize; j++) {
+      const box = document.createElement("div");
+      box.textContent= "*";
+      row.appendChild(box);
+    }
+    grid.appendChild(row);
+  }
+}
+
+function removeBoxes(n) {
+  const grid = document.querySelector(".grid");
+  
+  for (let i = 0; i < n; i++) {
+    grid.removeChild(grid.lastElementChild);
+  }
+
+  const rows = document.querySelectorAll(".row");
+
+  rows.forEach((row) => {
+    for (let i = 0; i < n; i++) {
+      row.removeChild(row.lastElementChild);
+    }
+  });
+}
+
+function updateGrid(n) {
+  if (n < gridSize) removeBoxes(gridSize - n);
+  else addBoxes(n - gridSize);
+  
+  gridSize = n;
+}
+
 const slider = document.querySelector(".setSize");
 const displaySize = document.querySelector(".displaySize");
+let gridSize = null;
 
 displaySize.textContent = `Grid size: ${slider.value}`;
-createGrid(slider.value);
+createGrid(slider.valueAsNumber);
+
 
 slider.addEventListener('input', event => {
   displaySize.textContent = `Grid size: ${event.target.value}`;
-  destroyGrid();
-  createGrid(event.target.value);
+  updateGrid(event.target.valueAsNumber);
 });
 
 
